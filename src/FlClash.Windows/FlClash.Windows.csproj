@@ -15,5 +15,6 @@
   <ItemGroup>
     <PackageReference Include="YamlDotNet" Version="16.3.0" />
     <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Net.Http" />
   </ItemGroup>
 </Project>
