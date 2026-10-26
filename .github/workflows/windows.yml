@@ -1,0 +1,36 @@
+name: Windows Native CI
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  build-and-smoke:
+    runs-on: windows-2022
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup NuGet
+        uses: NuGet/setup-nuget@v2
+      - name: Restore
+        shell: pwsh
+        run: nuget restore FlClashWindowsNative.sln
+      - name: Build x64 Release
+        shell: pwsh
+        run: dotnet build FlClashWindowsNative.sln -c Release --no-restore -p:Platform=x64
+      - name: Smoke tests
+        shell: pwsh
+        run: .\tests\FlClash.Windows.SmokeTests\bin\x64\Release\net48\FlClash.Windows.SmokeTests.exe
+      - name: Package prototype with official verified Mihomo
+        shell: pwsh
+        run: |
+          New-Item -Type Directory -Force dist\FlClash-Windows-Prototype\core | Out-Null
+          Copy-Item src\FlClash.Windows\bin\x64\Release\net48\* dist\FlClash-Windows-Prototype\ -Recurse -Force
+          .\scripts\Install-OfficialMihomo.ps1 -Version v1.19.33 -AppDirectory (Resolve-Path dist\FlClash-Windows-Prototype).Path
+          Compress-Archive -Path dist\FlClash-Windows-Prototype -DestinationPath dist\FlClash-Windows-Prototype.zip
+      - uses: actions/upload-artifact@v4
+        with:
+          name: FlClash-Windows-Prototype
+          path: dist/FlClash-Windows-Prototype.zip
+          if-no-files-found: error

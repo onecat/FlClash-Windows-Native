@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net48</TargetFramework>
+    <PlatformTarget>x64</PlatformTarget>
+    <LangVersion>7.3</LangVersion>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="../../src/FlClash.Windows/FlClash.Windows.csproj" />
+    <PackageReference Include="YamlDotNet" Version="16.3.0" />
+    <Reference Include="System.Web.Extensions" />
+  </ItemGroup>
+</Project>
