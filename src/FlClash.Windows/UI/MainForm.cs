@@ -380,8 +380,7 @@ namespace FlClash.Windows.UI
         {
             if (IsDisposed || Disposing || !IsHandleCreated) return;
             try { BeginInvoke((MethodInvoker)(() => { if (!IsDisposed) action(); })); }
-            catch (InvalidOperationException) { }
-            catch (ObjectDisposedException) { }
+            catch (InvalidOperationException) { } // also covers ObjectDisposedException
         }
 
         private void UpdateButtons()
