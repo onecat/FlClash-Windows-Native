@@ -14,7 +14,7 @@
 
 ## Blocked / not completed
 
-- [ ] GitHub independent repository: the current connected GitHub actions cannot create a new repository. No writes were made to `onecat/FlClash`. Project is currently a ZIP artifact to import into a new repository.
+- [x] GitHub independent repository: source committed to `onecat/FlClash-Windows-Native` (`main`) without modifying `onecat/FlClash`.
 - [ ] Windows build: current execution environment is Linux and has neither dotnet SDK nor .NET Framework targeting pack/Windows GUI runtime. No compile or smoke execution claim.
 - [ ] Official Core runtime integration on Windows 10 22H2 / Windows 11: no Windows runner or test machine available in this session.
 - [ ] Memory baseline and 8/24/72h validation: user machine measurements required.
@@ -24,7 +24,7 @@
 
 ## Next gate (before calling this M1 verified)
 
-1. Create independent GitHub repository and import this source ZIP without touching original FlClash main branch.
+1. [x] Create independent GitHub repository and import source without touching original FlClash main branch.
 2. Run `Windows Native CI` on Windows runner, fix any compiler/restore issues, and execute smoke harness.
 3. Build real test package with `v1.19.33` pinned core and upstream asset digest verification.
 4. Test on Win10 22H2 and Win11 with a trusted YAML profile; observe Core process, selector, traffic WS, tray and system proxy restore.
